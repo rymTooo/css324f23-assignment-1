@@ -1,4 +1,5 @@
 import copy
+import math
 
 
 def initial_state():
@@ -43,12 +44,22 @@ def h1(s):
     # The for loop counts the number of elements that is different from
     # the goal configuration.
     # We start from index 1 to 8 because the blank is excluded.
-    for idx in range(1, 9):
+    for idx in range(0,8):
         if goal[idx] != board[idx]:
             res += 1
     return res
 
+
 def h3(s):
     # implement this function
     board, _, _ = s
-    return 0
+    res =0
+    for idx in range(0,8):
+        num = board[idx]
+        r = (num-1)//3
+        c = (num-1)%3
+        r_a = idx//3
+        c_a = idx%3
+        res += math.fabs(r-r_a) + math.fabs(c-c_a)
+
+    return res
